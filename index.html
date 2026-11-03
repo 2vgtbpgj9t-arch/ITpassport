@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="ja" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f4f1e9">
+<meta name="description" content="ITパスポートの勉強方法と合格に向けた学習の目安をまとめたガイド。">
+<title>ITパスポートを取得するまで</title>
+<style>
+:root {
+  color-scheme: light;
+  --page: #f4f1e9;
+  --paper: #fffefa;
+  --paper-2: #f8f6f0;
+  --ink: #1d2d35;
+  --muted: #68757a;
+  --line: #dedbd2;
+  --line-strong: #c9c4b8;
+  --accent: #bd5638;
+  --accent-deep: #94432e;
+  --accent-soft: #f5e8e1;
+  --teal: #315d60;
+  --shadow: 0 16px 45px rgba(38, 46, 43, .07);
+  --article-scale: 1;
+  --header-height: 68px;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #121a1e;
+  --paper: #192429;
+  --paper-2: #202e33;
+  --ink: #edf0e9;
+  --muted: #b0bbb8;
+  --line: #334247;
+  --line-strong: #4a5a5e;
+  --accent: #ed987b;
+  --accent-deep: #ffb198;
+  --accent-soft: #3b2b28;
+  --teal: #9bc4bd;
+  --shadow: 0 18px 48px rgba(0, 0, 0, .22);
+}
+* { box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height) + 24px);
+  line-break: strict;
+}
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--page);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  font-size: 16px;
+  line-height: 1.9;
+  letter-spacing: .015em;
+  word-break: normal;
+  overflow-wrap: break-word;
+  transition: background-color .2s ease, color .2s ease;
+}
+::selection { background: var(--accent); color: #fff; }
+a { color: var(--teal); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+a:hover { color: var(--accent-deep); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+button { font: inherit; }
+.skip-link { position: fixed; top: 10px; left: 10px; z-index: 1000; padding: .6rem 1rem; color: white; background: var(--ink); transform: translateY(-150%); }
+.skip-link:focus { transform: translateY(0); }
+.progress-track { position: fixed; inset: 0 0 auto; height: 3px; z-index: 1200; background: transparent; }
+.progress-bar { width: 0; height: 100%; background: var(--accent); }
+.site-header {
+  position: sticky; top: 3px; z-index: 100;
+  height: var(--header-height);
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0 clamp(18px, 4vw, 58px);
+  color: #f7f4ec; background: #1d3038;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  box-shadow: 0 8px 22px rgba(20,35,40,.12);
+}
+.brand { display: flex; align-items: center; gap: .8rem; min-width: 0; font-weight: 750; letter-spacing: .04em; }
+.brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid rgba(255,255,255,.55); border-radius: 9px; color: white; font-size: .78rem; letter-spacing: .03em; }
+.brand-name { font-size: .96rem; white-space: nowrap; }
+.brand-sub { margin-left: .35rem; color: #b9c5c4; font-size: .72rem; font-weight: 500; letter-spacing: .12em; }
+.toolbar { display: flex; gap: .45rem; align-items: center; }
+.tool-button {
+  min-width: 40px; height: 36px; padding: 0 .65rem;
+  border: 1px solid rgba(255,255,255,.24); border-radius: 7px;
+  background: transparent; color: #f7f4ec; cursor: pointer;
+  font-size: .84rem; font-weight: 650;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+.tool-button:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.55); }
+.tool-button:active { transform: translateY(1px); }
+.tool-button:disabled { opacity: .38; cursor: not-allowed; }
+.tool-separator { width: 1px; height: 22px; background: rgba(255,255,255,.22); margin: 0 .25rem; }
+.page-shell {
+  width: min(1440px, calc(100% - 64px));
+  margin: 42px auto 100px;
+  display: grid;
+  grid-template-columns: 252px minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(32px, 5vw, 78px);
+}
+.toc-panel {
+  position: sticky; top: calc(var(--header-height) + 26px); align-self: start;
+  padding: 1.3rem 1.15rem 1.25rem;
+  background: var(--paper); border: 1px solid var(--line); border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(40,48,42,.045);
+}
+.toc-heading { display: flex; justify-content: space-between; align-items: center; margin: 0 0 .85rem; padding: 0 0 .85rem; border-bottom: 1px solid var(--line); }
+.toc-heading span:first-child { font-size: .75rem; letter-spacing: .16em; font-weight: 800; color: var(--muted); }
+.toc-heading span:last-child { font-family: Georgia, serif; font-size: .7rem; color: var(--accent); letter-spacing: .1em; }
+.toc-links { display: grid; gap: .28rem; }
+.toc-link { display: grid; grid-template-columns: 30px minmax(0,1fr); align-items: start; gap: .45rem; padding: .62rem .55rem; border-left: 2px solid transparent; border-radius: 2px; text-decoration: none; color: var(--muted); font-size: .84rem; line-height: 1.55; transition: color .18s, background .18s, border-color .18s; }
+.toc-index { font-family: Georgia, "Times New Roman", serif; font-size: .83rem; font-weight: 700; color: #a2a39a; font-variant-numeric: tabular-nums; }
+.toc-label { font-weight: 620; }
+.toc-link:hover { color: var(--accent-deep); background: var(--paper-2); }
+.toc-link[aria-current="location"] { color: var(--ink); background: var(--accent-soft); border-left-color: var(--accent); }
+.toc-link[aria-current="location"] .toc-index { color: var(--accent); }
+.content-column { min-width: 0; }
+.article { min-width: 0; max-width: 930px; margin: 0 auto; }
+.article-hero { position: relative; padding: clamp(30px, 5vw, 66px) clamp(24px, 5vw, 66px) clamp(28px, 4vw, 52px); color: #f8f5ed; background: #263c43; overflow: hidden; }
+.article-hero::after { content: ""; position: absolute; width: 270px; height: 270px; right: -82px; top: -112px; border: 1px solid rgba(255,255,255,.16); border-radius: 50%; box-shadow: 0 0 0 28px rgba(255,255,255,.035), 0 0 0 58px rgba(255,255,255,.025); pointer-events: none; }
+.hero-kicker { margin: 0 0 1.1rem; color: #d9a18d; font-size: .72rem; font-weight: 800; letter-spacing: .2em; }
+.article-title {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  color: #fffdf8;
+  font-size: clamp(2.15rem, 4.8vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -.045em;
+  line-height: 1.28;
+  text-wrap: balance;
+  line-break: strict;
+  word-break: normal;
+  overflow-wrap: normal;
+}
+.article-title .title-phrase {
+  display: inline-block;
+  white-space: nowrap;
+}
+.article p, .detail-list, .practice-steps, .resource-list {
+  text-wrap: pretty;
+  line-break: strict;
+  word-break: normal;
+}
+.hero-rule { width: 76px; height: 4px; margin-top: 2rem; background: #d87958; }
+.intro-copy { margin: 0 0 clamp(4.5rem, 8vw, 7rem); padding: clamp(26px, 4.2vw, 48px) clamp(24px, 5vw, 64px); background: var(--paper); border: 1px solid var(--line); border-top: 0; }
+.intro-copy p { max-width: 67ch; margin: 0; font-size: calc(1.01rem * var(--article-scale)); line-height: 2.05; color: var(--muted); }
+.intro-copy p + p { margin-top: 1.05rem; }
+.chapter { margin: 0 0 clamp(5.4rem, 9vw, 8.5rem); scroll-margin-top: calc(var(--header-height) + 25px); }
+.chapter-title {
+  display: grid; grid-template-columns: clamp(76px, 10vw, 118px) minmax(0,1fr); align-items: center;
+  gap: clamp(15px, 2vw, 25px);
+  margin: 0 0 2.25rem; padding: 0 0 1.45rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+.chapter-number {
+  color: var(--accent); font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.7rem, 6.4vw, 5.7rem); font-weight: 700; letter-spacing: -.085em;
+  line-height: .95; font-variant-numeric: lining-nums tabular-nums;
+}
+.chapter-name { display: block; color: var(--ink); font-size: clamp(1.55rem, 2.7vw, 2.15rem); font-weight: 800; letter-spacing: -.035em; line-height: 1.45; }
+.chapter > p, .method-block > p { max-width: 68ch; margin: 0 0 1.1rem; font-size: calc(1.02rem * var(--article-scale)); line-height: 2.05; }
+.chapter > p + p { margin-top: .95rem; }
+.method-block { margin: 2.9rem 0 0; padding: 0 0 0 clamp(18px, 3vw, 34px); border-left: 2px solid var(--line-strong); }
+.method-title { position: relative; margin: 0 0 1.2rem; padding: .1rem 0 .1rem 0; color: var(--ink); font-size: clamp(1.2rem, 2vw, 1.48rem); font-weight: 800; line-height: 1.55; }
+.method-title::before { content: ""; position: absolute; left: calc(-1 * clamp(18px, 3vw, 34px) - 3px); top: .22em; width: 5px; height: 1.45em; background: var(--accent); }
+.detail-list { list-style: none; margin: 1.15rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+.detail-item { padding: 1.05rem 0 1.1rem; border-bottom: 1px solid var(--line); }
+.detail-row { display: grid; grid-template-columns: minmax(125px, 190px) minmax(0,1fr); gap: 1rem; align-items: baseline; }
+.item-label { color: var(--accent-deep); font-size: .91rem; font-weight: 800; }
+.item-description { color: var(--ink); font-size: calc(.98rem * var(--article-scale)); line-height: 1.9; }
+.practice-steps { list-style: none; counter-reset: study-step; margin: 1.2rem 0 0; padding: 0; border-top: 1px solid var(--line); }
+.practice-steps > li { counter-increment: study-step; display: grid; grid-template-columns: 46px minmax(0,1fr); gap: .95rem; padding: 1.3rem 0 1.45rem; border-bottom: 1px solid var(--line); color: var(--muted); font-size: calc(.98rem * var(--article-scale)); line-height: 1.95; }
+.practice-steps > li::before { content: "0" counter(study-step); padding-top: .1rem; color: var(--accent); font-family: Georgia, serif; font-size: 1.5rem; font-weight: 700; line-height: 1.3; }
+.step-content { min-width: 0; }
+.step-description { color: var(--muted); }
+.step-heading { display: block; margin-bottom: .45rem; color: var(--ink); font-size: 1.04rem; }
+.step-heading strong { font-weight: 800; }
+blockquote { position: relative; margin: 2rem 0 0; padding: 1.7rem 1.8rem 1.75rem 2rem; background: var(--accent-soft); border-left: 4px solid var(--accent); color: var(--ink); }
+blockquote::before { content: "“"; position: absolute; top: -.16em; right: .2em; color: var(--accent); opacity: .22; font-family: Georgia, serif; font-size: 5.5rem; line-height: 1; }
+blockquote strong:first-child { display: inline-block; margin-bottom: .45rem; color: var(--accent-deep); font-size: 1.02rem; }
+blockquote br { display: block; content: ""; margin-top: .35rem; }
+.table-scroll { margin: 1.7rem 0 2rem; overflow-x: auto; background: var(--paper); border: 1px solid var(--line); }
+.score-table { width: 100%; border-collapse: collapse; font-size: calc(1rem * var(--article-scale)); text-align: left; }
+.score-table th, .score-table td { padding: 1rem 1.25rem; border-bottom: 1px solid var(--line); }
+.score-table th { color: var(--muted); background: var(--paper-2); font-size: .83rem; font-weight: 800; letter-spacing: .04em; }
+.score-table td:last-child, .score-table th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.score-table tbody tr:last-child td { border-bottom: 0; background: var(--accent-soft); color: var(--accent-deep); font-weight: 800; }
+.score-callout { display: flex; flex-wrap: wrap; align-items: baseline; gap: .3rem 1rem; margin: 2.4rem 0 2rem !important; padding: 1.3rem 1.5rem; border-top: 1px solid var(--accent); border-bottom: 1px solid var(--accent); background: linear-gradient(90deg, var(--accent-soft), transparent 85%); }
+.score-callout strong { color: var(--accent-deep); font-size: clamp(1.6rem, 3vw, 2.25rem); line-height: 1.25; letter-spacing: -.04em; }
+.chapter[data-chapter="4"] > p:last-child { margin-top: 1.5rem; padding: 1.35rem 1.5rem; background: var(--paper-2); border-left: 3px solid var(--accent); }
+.chapter[data-chapter="4"] > p:last-child strong { color: var(--accent-deep); font-size: 1.2em; }
+.resource-list { list-style: none; display: grid; gap: .7rem; margin: 1.5rem 0 0; padding: 0; }
+.resource-list li a { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.05rem 1.2rem; background: var(--paper); border: 1px solid var(--line); color: var(--teal); font-weight: 750; text-decoration: none; transition: border-color .18s, transform .18s, background .18s; }
+.resource-list li a::after { content: "↗"; color: var(--accent); font-size: 1.1rem; }
+.resource-list li a:hover { transform: translateX(3px); border-color: var(--accent); background: var(--paper-2); }
+.parenthetical-note { color: var(--muted); }
+.back-to-top {
+  position: fixed; right: 24px; bottom: 24px; z-index: 90;
+  width: 46px; height: 46px; border: 1px solid var(--line-strong); border-radius: 50%;
+  background: var(--paper); color: var(--ink); box-shadow: var(--shadow); cursor: pointer;
+  opacity: 0; pointer-events: none; transform: translateY(8px); transition: opacity .2s, transform .2s;
+}
+.back-to-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.back-to-top:hover { border-color: var(--accent); color: var(--accent); }
+.site-footer { width: min(1440px, calc(100% - 64px)); margin: 0 auto 38px; padding-top: 1.2rem; border-top: 1px solid var(--line-strong); color: var(--muted); font-size: .74rem; letter-spacing: .08em; }
+@media (max-width: 1020px) {
+  .page-shell { width: min(900px, calc(100% - 42px)); grid-template-columns: minmax(0,1fr); gap: 1.5rem; margin-top: 26px; }
+  .toc-panel { position: static; }
+  .toc-links { grid-template-columns: 1fr; }
+  .toc-link { min-height: 48px; }
+  .article { max-width: none; }
+}
+@media (max-width: 600px) {
+  :root { --header-height: 60px; }
+  body { font-size: 15px; }
+  .site-header { height: var(--header-height); padding: 0 14px; }
+  .brand { gap: .55rem; }
+  .brand-mark { width: 30px; height: 30px; }
+  .brand-name { font-size: .82rem; }
+  .brand-sub { display: none; }
+  .toolbar { gap: .28rem; }
+  .tool-button { min-width: 34px; height: 33px; padding: 0 .48rem; font-size: .78rem; }
+  .tool-separator { margin: 0 .1rem; }
+  .page-shell { width: calc(100% - 24px); margin: 14px auto 70px; gap: 1rem; }
+  .toc-panel { padding: .95rem .85rem; border-radius: 4px; }
+  .toc-heading { margin-bottom: .55rem; padding-bottom: .55rem; }
+  .toc-links { gap: .15rem; }
+  .toc-link { grid-template-columns: 24px minmax(0,1fr); gap: .3rem; padding: .48rem .38rem; font-size: .75rem; line-height: 1.5; min-height: 42px; }
+  .toc-index { font-size: .73rem; }
+  .article-hero { padding: 29px 23px 31px; }
+  .article-hero::after { width: 180px; height: 180px; right: -80px; top: -70px; }
+  .hero-kicker { font-size: .63rem; margin-bottom: .75rem; }
+  .article-title {
+    font-size: clamp(1.78rem, 8vw, 2.35rem);
+    line-height: 1.3;
+  }
+  .article-title .title-phrase { display: block; width: max-content; max-width: 100%; }
+  .intro-copy { margin-bottom: 4.2rem; padding: 23px 21px 26px; }
+  .intro-copy p { font-size: calc(.96rem * var(--article-scale)); line-height: 1.95; }
+  .chapter { margin-bottom: 5rem; }
+  .chapter-title { grid-template-columns: 54px minmax(0,1fr); gap: 12px; margin-bottom: 1.55rem; padding-bottom: 1rem; }
+  .chapter-number { font-size: 3.15rem; }
+  .chapter-name { font-size: 1.42rem; line-height: 1.45; }
+  .chapter > p, .method-block > p { font-size: calc(.97rem * var(--article-scale)); line-height: 1.95; }
+  .method-block { margin-top: 2.35rem; padding-left: 17px; }
+  .method-title { font-size: 1.12rem; margin-bottom: .85rem; }
+  .method-title::before { left: -20px; width: 4px; }
+  .detail-item { padding: .9rem 0; }
+  .detail-row { grid-template-columns: 1fr; gap: .2rem; }
+  .item-label { font-size: .84rem; }
+  .item-description { font-size: calc(.93rem * var(--article-scale)); }
+  .practice-steps > li { grid-template-columns: 34px minmax(0,1fr); gap: .6rem; padding: 1.05rem 0 1.2rem; font-size: calc(.92rem * var(--article-scale)); }
+  .practice-steps > li::before { font-size: 1.23rem; }
+  blockquote { padding: 1.25rem 1.1rem; font-size: .93rem; }
+  .score-table { min-width: 390px; font-size: .9rem; }
+  .score-table th, .score-table td { padding: .82rem .9rem; }
+  .score-callout { align-items: flex-start; flex-direction: column; padding: 1.05rem 1rem; }
+  .chapter[data-chapter="4"] > p:last-child { padding: 1.05rem 1rem; }
+  .resource-list li a { padding: .9rem .85rem; font-size: .9rem; }
+  .back-to-top { width: 42px; height: 42px; right: 14px; bottom: 14px; }
+  .site-footer { width: calc(100% - 28px); }
+}
+@media (max-width: 370px) {
+  .brand-name { font-size: .74rem; }
+  .tool-button { min-width: 31px; padding: 0 .35rem; }
+  .toc-links { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}
+@media print {
+  :root { color-scheme: light; }
+  body { background: white; color: black; }
+  .site-header, .toc-panel, .progress-track, .back-to-top, .site-footer { display: none !important; }
+  .page-shell { display: block; width: 100%; margin: 0; }
+  .article { max-width: none; }
+  .article-hero { background: #263c43 !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .chapter { break-inside: avoid-page; }
+  a { color: black; }
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#article">本文へ移動</a>
+<div class="progress-track" aria-hidden="true"><div class="progress-bar" id="progressBar"></div></div>
+<header class="site-header">
+  <div class="brand" aria-label="ITパスポート勉強ガイド">
+    <span class="brand-mark" aria-hidden="true">IT</span>
+    <span class="brand-name">ITパスポート</span>
+    <span class="brand-sub">STUDY JOURNAL</span>
+  </div>
+  <div class="toolbar" aria-label="表示設定">
+    <button class="tool-button" id="fontDown" type="button" aria-label="文字を小さくする" title="文字を小さくする">A−</button>
+    <button class="tool-button" id="fontUp" type="button" aria-label="文字を大きくする" title="文字を大きくする">A＋</button>
+    <span class="tool-separator" aria-hidden="true"></span>
+    <button class="tool-button" id="themeToggle" type="button" aria-label="ダークモードに切り替える" title="ダークモードに切り替える" aria-pressed="false"><span id="themeIcon" aria-hidden="true">☾</span><span> テーマ</span></button>
+  </div>
+</header>
+<main class="page-shell">
+  <aside class="toc-panel" aria-label="目次">
+    <p class="toc-heading"><span>CONTENTS</span><span>目次 / 07</span></p>
+    <nav class="toc-links" id="tableOfContents" aria-label="ページ内目次">
+      <a class="toc-link" href="#section-1" aria-current="location"><span class="toc-index">01</span><span class="toc-label">はじめに</span></a>
+<a class="toc-link" href="#section-2"><span class="toc-index">02</span><span class="toc-label">当時の勉強法</span></a>
+<a class="toc-link" href="#section-3"><span class="toc-index">03</span><span class="toc-label">合格の目安（最低何問あっていたら合格できるか）</span></a>
+<a class="toc-link" href="#section-4"><span class="toc-index">04</span><span class="toc-label">捨ててはいけない問題</span></a>
+<a class="toc-link" href="#section-5"><span class="toc-index">05</span><span class="toc-label">参考にしたもの（インプット用）</span></a>
+<a class="toc-link" href="#section-6"><span class="toc-index">06</span><span class="toc-label">その他</span></a>
+<a class="toc-link" href="#section-7"><span class="toc-index">07</span><span class="toc-label">さいごに</span></a>
+    </nav>
+  </aside>
+  <div class="content-column">
+    <article class="article" id="article">
+      <div class="article-hero">
+        <h1 class="article-title"><span class="title-phrase">ITパスポートを</span><span class="title-phrase">取得するまで</span></h1>
+        <div class="hero-rule" aria-hidden="true"></div>
+      </div>
+      <div class="intro-copy">
+<p>これはITパスポートを取得する人に向けて、当時の自分がどのような勉強をしていたかや、自分の実体験を元にこうしたらいいんじゃない？といったアドバイスなど、また、ITパスポートに関する情報等を記したものとなる。</p>
+<p>あくまで勉強法については主観で話すだけなので、同じようにやれば受かるといったものでは決してないというのと、もっと効率的勉強法が見つかるかも知れません。その時は、そっちに切り替えたほうがいいと思います。</p>
+<p>また、当時の環境・自分の長所・学校生活なども踏まえて話しているのでご了承ください。</p>
+</div>
+      <section aria-labelledby="section-1" class="chapter" data-chapter="1"><h2 class="chapter-title" id="section-1"><span aria-hidden="true" class="chapter-number">1.</span><span class="chapter-name">はじめに</span></h2><p>夏休みに勉強を始め、そこから約2〜3ヶ月勉強して合格しました。</p><ul class="detail-list">
+<li class="detail-item"><div class="detail-row"><span class="item-label"><strong>学習時間</strong>:</span><span class="item-description"> 1日何時間勉強したかは覚えていませんが、時間が空いたらとりあえず問題を解くようにしていました。</span></div></li>
+<li class="detail-item"><div class="detail-row"><span class="item-label"><strong>学習割合</strong>:</span><span class="item-description"> インプットとアウトプットの割合は <strong>2 : 8</strong> でした。</span></div></li>
+</ul></section><section aria-labelledby="section-2" class="chapter" data-chapter="2"><h2 class="chapter-title" id="section-2"><span aria-hidden="true" class="chapter-number">2.</span><span class="chapter-name">当時の勉強法</span></h2><p>主に2つの勉強法で進めていきました。</p><section class="method-block"><h3 class="method-title">① 教科書を使って勉強する</h3><ul class="detail-list">
+<li class="detail-item"><div class="detail-row"><span class="item-label"><strong>使用ツール</strong>:</span><span class="item-description"> 高校で購入した教科書</span></div></li>
+<li class="detail-item"><div class="detail-row"><span class="item-label"><strong>期間</strong>:</span><span class="item-description"> 最初の数週間から1ヶ月程度</span></div></li>
+<li class="detail-item"><div class="detail-row"><span class="item-label"><strong>進め方</strong>:</span><span class="item-description"> ストラテジ系から順番に進める手法を採用。具体的には「中分類のここからここまでをとりあえず解いてみて、終わったら休憩しよう」というサイクルの繰り返し。</span></div></li>
+</ul></section><section class="method-block"><h3 class="method-title">② 過去問道場を使って勉強する</h3><p>教科書よりも、こちらの方法に時間をかけていました。</p><ol class="practice-steps">
+<li><div class="step-content"><div class="step-heading"><strong>分野別の演習</strong></div><div class="step-description">
+      分野が終わるごと（例：教科書のストラテジ系の問題をすべて解いたあと）に、その分野だけに絞って過去問を解く。例：ストラテジ系は本番で35問出るため、ストラテジ系だけに絞って35問を何日間かに分けて解くことを数回繰り返す。</div></div></li>
+<li><div class="step-content"><div class="step-heading"><strong>試験回指定（全100問）での演習</strong></div><div class="step-description">
+      3分野が一通り終わった頃に、1度本番として100問解いてみましたが、最初は全然解けませんでした。そこからは分野別ではなく「試験回を指定してずっと解く」→「自分の決めた日に本番通り100問解く」→「また試験回を指定して解く」という流れを繰り返しました。</div></div></li>
+<li><div class="step-content"><div class="step-heading"><strong>苦手分野の補強</strong></div><div class="step-description">
+      解いていくうちに「この分野が苦手だな」「この大分類が覚えられないな」という課題が出てくるので、その場合は苦手に絞って安定するまで解き直しました。</div></div></li>
+</ol></section><section class="method-block"><h3 class="method-title">💡 その他の工夫＆重要ポイント</h3><ul class="detail-list">
+<li class="detail-item"><div class="detail-row"><span class="item-label"><strong>暗記法</strong>:</span><span class="item-description"> どうしても覚えられない時は、紙に用語と意味を書いて暗記しました。</span></div></li>
+<li class="detail-item"><div class="detail-row"><span class="item-label"><strong>生成AIの活用</strong>:</span><span class="item-description"> 「この問題は何が言いたいんだ？」と疑問に思った時は、生成AIを使って理解を深めました。（今はもっとAIが発展しているので、過去問道場と組み合わせればより効率的に勉強できるかも？）</span></div></li>
+<li class="detail-item"><div class="detail-row"><span class="item-label"><strong>間違えた問題の復習</strong>:</span><span class="item-description"> 間違えた問題は必ず復習することを心がけましょう。</span></div></li>
+</ul><blockquote>
+<strong>【重要】解くだけでは身につきません！</strong><br/>
+      正解・不正解に関わらず、問題を解くごとに「他の選択肢の意味」も見ておきましょう。<br/>
+      例えば「意味に適した用語を選ぶ問題」の場合、<strong>自分が選ばなかった用語がどんな意味を表しているのか</strong>までしっかりと読んで覚えていくことが大切です。
+    </blockquote></section></section><section aria-labelledby="section-3" class="chapter" data-chapter="3"><h2 class="chapter-title" id="section-3"><span aria-hidden="true" class="chapter-number">3.</span><span class="chapter-name">合格の目安（最低何問あっていたら合格できるか）</span></h2><p>本番は配点が公表されていないため、あくまで過去問を解く際の目安として参考にしてください。</p><div aria-label="合格の目安の表" class="table-scroll" role="region" tabindex="0"><table class="score-table">
+<thead>
+<tr>
+<th>分野</th>
+<th>目安の正解数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ストラテジ系</strong></td>
+<td><strong>35問中 22問</strong></td>
+</tr>
+<tr>
+<td><strong>マネジメント系</strong></td>
+<td><strong>20問中 13問</strong></td>
+</tr>
+<tr>
+<td><strong>テクノロジ系</strong></td>
+<td><strong>45問中 29問</strong></td>
+</tr>
+<tr>
+<td><strong>合計</strong></td>
+<td><strong>100問中 64問</strong></td>
+</tr>
+</tbody>
+</table></div><p class="score-callout"><strong>100問中 64問以上</strong> を取れるように目指しましょう。</p><p>ただし、模試や過去問で70〜80問取れたからといって絶対受かるわけではありません。</p><p>実体験として、試験の週に1回本番用として解いた際は70問以上取れていたと思いますが、実際の本番試験では合格点ギリギリでした。</p></section><section aria-labelledby="section-4" class="chapter" data-chapter="4"><h2 class="chapter-title" id="section-4"><span aria-hidden="true" class="chapter-number">4.</span><span class="chapter-name">捨ててはいけない問題</span></h2><p>ほんとはどの問題も捨てちゃいけないけれど、特に捨ててはいけない系統の問題があります。</p><p>それは <strong>「計算問題」</strong> です。<br/>「計算が苦手だから…」と捨てようとすると、後で後悔することになります。</p></section><section aria-labelledby="section-5" class="chapter" data-chapter="5"><h2 class="chapter-title" id="section-5"><span aria-hidden="true" class="chapter-number">5.</span><span class="chapter-name">参考にしたもの（インプット用）</span></h2><p>インプット用として以下のYouTubeチャンネルを活用していました。</p><ul class="resource-list">
+<li><a href="https://www.youtube.com/@mimi_study/videos" rel="noopener noreferrer" target="_blank">みみ / ITパスポート勉強部屋 (YouTube)</a></li>
+<li><a href="https://www.youtube.com/@nishi0809/videos" rel="noopener noreferrer" target="_blank">にしひろ / ITパスポート (YouTube)</a></li>
+</ul></section><section aria-labelledby="section-6" class="chapter" data-chapter="6"><h2 class="chapter-title" id="section-6"><span aria-hidden="true" class="chapter-number">6.</span><span class="chapter-name">その他</span></h2><p>試験の数日前から始める勉強が一つありますが、一旦まだ話さないでおきます。</p></section><section aria-labelledby="section-7" class="chapter" data-chapter="7"><h2 class="chapter-title" id="section-7"><span aria-hidden="true" class="chapter-number">7.</span><span class="chapter-name">さいごに</span></h2><p>冒頭でも話しましたが、同じように勉強をしているからといって必ず受かるというわけではありません。</p><p>実際、私は教科書で問題を解くことに慣れていたので勉強法として取り入れましたが、人によっては「過去問道場だけで受かるから教科書とかいらん」と思う人もいます。</p><p>なので、自分に適した勉強法を見つけましょう。</p><p>また、今からでもいいので早めに試験日を決めて申し込んでおきましょう<span class="parenthetical-note">（…と思いましたが、これを書いている最中に調べたら12月までほぼ全部埋まっているそうですね。もう申し込んでいるんだったら大丈夫なのですが…）</span>。</p><p>自分の持ち合わせている情報はすべて話したと思うので、頑張ってください！陰ながら応援しています。</p></section>
+    </article>
+  </div>
+</main>
+<button class="back-to-top" id="backToTop" type="button" aria-label="ページの先頭へ戻る" title="ページの先頭へ戻る">↑</button>
+<script>
+(() => {
+  'use strict';
+  const root = document.documentElement;
+  const tocLinks = [...document.querySelectorAll('.toc-link')];
+  const headings = [...document.querySelectorAll('.chapter-title')];
+  const progressBar = document.getElementById('progressBar');
+  const backToTop = document.getElementById('backToTop');
+  const fontDown = document.getElementById('fontDown');
+  const fontUp = document.getElementById('fontUp');
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+
+  // Keep the table of contents open at every viewport. Highlight the chapter nearest the reading position.
+  const markActive = (id) => {
+    tocLinks.forEach(link => {
+      if (link.getAttribute('href') === `#${id}`) link.setAttribute('aria-current', 'location');
+      else link.removeAttribute('aria-current');
+    });
+  };
+  const updateActiveChapter = () => {
+    const readingLine = 300;
+    let current = headings[0];
+    for (const heading of headings) {
+      if (heading.getBoundingClientRect().top <= readingLine) current = heading;
+      else break;
+    }
+    if (current) markActive(current.id);
+  };
+  window.addEventListener('scroll', updateActiveChapter, { passive: true });
+  window.addEventListener('resize', updateActiveChapter);
+  tocLinks.forEach(link => link.addEventListener('click', () => window.setTimeout(updateActiveChapter, 300)));
+  updateActiveChapter();
+
+  const updateScroll = () => {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+    progressBar.style.width = `${Math.max(0, Math.min(100, progress))}%`;
+    backToTop.classList.toggle('is-visible', window.scrollY > 480);
+  };
+  window.addEventListener('scroll', updateScroll, { passive: true });
+  window.addEventListener('resize', updateScroll);
+  updateScroll();
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  let scale = 1;
+  const applyScale = () => {
+    root.style.setProperty('--article-scale', scale.toFixed(2));
+    fontDown.disabled = scale <= .88;
+    fontUp.disabled = scale >= 1.20;
+  };
+  fontDown.addEventListener('click', () => { scale = Math.max(.88, +(scale - .04).toFixed(2)); applyScale(); });
+  fontUp.addEventListener('click', () => { scale = Math.min(1.20, +(scale + .04).toFixed(2)); applyScale(); });
+  applyScale();
+
+  const setTheme = theme => {
+    root.dataset.theme = theme;
+    const dark = theme === 'dark';
+    themeToggle.setAttribute('aria-pressed', String(dark));
+    themeToggle.setAttribute('aria-label', dark ? 'ライトモードに切り替える' : 'ダークモードに切り替える');
+    themeToggle.title = dark ? 'ライトモードに切り替える' : 'ダークモードに切り替える';
+    themeIcon.textContent = dark ? '☀' : '☾';
+  };
+  let savedTheme = 'light';
+  try { savedTheme = localStorage.getItem('itpassport-theme') || 'light'; } catch (_) { /* local fileでも切り替え可能 */ }
+  setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+  themeToggle.addEventListener('click', () => {
+    const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    try { localStorage.setItem('itpassport-theme', next); } catch (_) { /* 保存できなくても切り替えは有効 */ }
+  });
+})();
+</script>
+</body>
+</html>
